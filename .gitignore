@@ -4,8 +4,18 @@
 __pycache__/
 *.pyc
 
+# Dependencies
+node_modules/
+.venv/
+leaflet-omnivore-master/
+
+# Testing
+.pytest_cache/
+
 # Utility Scripts
 normalize_filenames.py
 migrate_bootstrap.py
+redesign_sites.py
+refactor_sites.py
 map_failure.png
 verify_links.py
