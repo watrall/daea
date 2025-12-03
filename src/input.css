@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Base Styles */
+@layer base {
+
+    html,
+    body {
+        @apply h-full w-full m-0 p-0 overflow-hidden;
+        /* Prevent scrolling on main map page */
+    }
+}
+
+/* Glassmorphism Utilities */
+@layer utilities {
+    .glass {
+        @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+    }
+
+    .glass-dark {
+        @apply bg-black/70 backdrop-blur-md border border-white/10 shadow-lg text-white;
+    }
+}

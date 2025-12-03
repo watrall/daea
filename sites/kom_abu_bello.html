@@ -1,53 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
     <title>Kom Abu Bello - DAEA</title>
-
-    <!-- Custom styles for this template -->
-    <link href="../../css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/leaflet.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Tailwind CSS -->
+    <link href="../css/output.css" rel="stylesheet">
 </head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-<body>
-
-    <!-- cenralized navbar -->
+    <!-- Navbar -->
     <div id="central-nav"></div>
 
-    <!-- Begin page content -->
+    <!-- Hero Section -->
+    <header class="bg-blue-900 text-white py-24 mb-12 shadow-xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30 z-0"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-md">Kom Abu Bello</h1>
+            <p class="text-2xl text-blue-100 mb-6 font-light tracking-wide">Predynastic Period</p>
+            <div class="inline-block bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                <p class="text-sm uppercase tracking-widest text-blue-50 font-semibold">Author: Unknown</p>
+            </div>
+        </div>
+    </header>
 
-    <div id="detail">
-        <h1>Kom Abu Bello</h1>
-        <h3>Predynastic Period</h3>
-        <h4>Author: Unknown</h4>
-        <h3>Overview</h3>
-        <hr>
-        <p>Content coming soon.</p>
-        <br>
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 mb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Left Column: Content -->
+            <div class="lg:col-span-8">
+                <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 prose prose-lg max-w-none text-gray-700 leading-relaxed">
+                    
+
+
+
+<h3 class="font-bold text-gray-900 mt-10 mb-6 text-2xl">Overview</h3>
+<hr class="my-10 border-gray-100"/>
+<p>Content coming soon.</p>
+<br/>
+
+                </div>
+            </div>
+            
+            <!-- Right Column: Quick Facts / Sidebar -->
+            <div class="lg:col-span-4 space-y-8">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+                    <div class="bg-gradient-to-r from-gray-50 to-white px-8 py-6 border-b border-gray-100">
+                        <h5 class="font-bold text-gray-800 uppercase tracking-wider text-sm flex items-center">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                            Quick Facts
+                        </h5>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-6">
+                            <li class="flex flex-col group">
+                                <span class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1 group-hover:text-blue-500 transition-colors">Period</span>
+                                <span class="font-medium text-gray-900 text-lg">Predynastic Period</span>
+                            </li>
+                            <!-- Placeholder for more facts if we could extract them -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-xl p-8 text-white relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-xl group-hover:bg-white/20 transition-all duration-500"></div>
+                    <h5 class="font-bold text-2xl mb-3 relative z-10">Explore More</h5>
+                    <p class="text-blue-100 mb-8 relative z-10">View this site on the interactive map to see its location and surrounding context.</p>
+                    <a href="../index.html" class="block w-full py-4 px-6 bg-white text-blue-700 font-bold text-center rounded-xl hover:bg-blue-50 transition transform hover:-translate-y-1 shadow-lg relative z-10">
+                        Back to Atlas
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <br>
-    <br>
-
-    <!-- centralized footer -->
+    <!-- Footer -->
     <div id="central-foot"></div>
 
-    <!-- Application Scripts -->
-    <script src="../../centralize-nav-foot/nav-foot.js"></script>
-    <script src="../../js/main.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script src="../centralize-nav-foot/nav-foot.js"></script>
+    <script src="../js/main.js"></script>
 </body>
-
 </html>

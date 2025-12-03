@@ -5,38 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Amarna - DAEA</title>
     
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Custom CSS -->
-    <link href="../css/style.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="../css/output.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
     <!-- Navbar -->
     <div id="central-nav"></div>
 
     <!-- Hero Section -->
-    <header class="bg-primary text-white py-5 mb-4">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Amarna</h1>
-            <p class="lead">18th Dynasty</p>
-            <p class="fst-italic">By: Tess Kilian</p>
+    <header class="bg-blue-900 text-white py-24 mb-12 shadow-xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30 z-0"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-md">Amarna</h1>
+            <p class="text-2xl text-blue-100 mb-6 font-light tracking-wide">18th Dynasty</p>
+            <div class="inline-block bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                <p class="text-sm uppercase tracking-widest text-blue-50 font-semibold">By: Tess Kilian</p>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <div class="container mb-5">
-        <div class="row">
+    <div class="container mx-auto px-4 mb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- Left Column: Content -->
-            <div class="col-lg-8">
-                <div class="card shadow-sm">
+            <div class="lg:col-span-8">
+                <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 prose prose-lg max-w-none text-gray-700 leading-relaxed">
                     <div class="card-body content-body">
-                        
-
-
-
-<h3>Introduction</h3>
-<hr/>
+<h3 class="font-bold text-gray-900 mt-10 mb-6 text-2xl">Introduction</h3>
+<hr class="my-10 border-gray-100"/>
 <p>The site of Amarna, also called el-Amarna or Tell el-Amarna, was a city built around 1350
 BC by King Akhenaten. The city was built as a new capital and for worship of the sun god, Aten.
 After a period of occupation of 15 to 20 years, the site was deserted after the death of the
@@ -50,11 +47,11 @@ to shed light on the entire site of Tell el-Amarna. Additionally, excavations of
 villages, within the larger site of Amarna, may give evidence to the lives of the non-elite 
 and what the inhabitants of the villages did with their daily lives.</p>
 <br/>
-<h3>Regional and Geographical Setting</h3>
-<hr/>
-<figure class="figure w-100">
-<img class="img-fluid rounded mb-3" src="http://www.amarnaproject.com/images/amarna_the_place/workmans_village/3.jpg"/>
-<figcaption class="figure-caption"><a data-bs-toggle="popover" data-content="Image 1. The Amarna Project." href="#" rel="citation">Image 1</a></figcaption>
+<h3 class="font-bold text-gray-900 mt-10 mb-6 text-2xl">Regional and Geographical Setting</h3>
+<hr class="my-10 border-gray-100"/>
+<figure class="figure w-100 w-full mb-8">
+<img class="img-fluid rounded-2xl shadow-lg mb-3 mb-8 w-full h-auto rounded" src="http://www.amarnaproject.com/images/amarna_the_place/workmans_village/3.jpg"/>
+<figcaption class="figure-caption text-sm text-gray-500 mt-3 italic text-center"><a data-bs-toggle="popover" data-content="Image 1. The Amarna Project." href="#" rel="citation">Image 1</a></figcaption>
 </figure>
 <p>Amarna is located on the east bank of the Nile at the border of Middle and Upper Egypt,
 in the province of El-Minia.It is approximately 312 kilometers south of Cairo. The site is on 
@@ -66,8 +63,8 @@ a valley that Akhenaten selected for his tomb. There are three depressions in th
 strata. The strata, which are level on either side curve down suddenly to a depth of about 200 
 feet (Petrie 2013).</p>
 <br/>
-<h3>Site Description</h3>
-<hr/>
+<h3 class="font-bold text-gray-900 mt-10 mb-6 text-2xl">Site Description</h3>
+<hr class="my-10 border-gray-100"/>
 <p>The site itself is about 10 kilometers long and five kilometers wide. Much of the western
 side of the city has disappeared due to modern cultivation. However, a large portion of the 
 city has been preserved in the desert to the east. Two sets of rock monuments occupy the site. 
@@ -89,8 +86,8 @@ An area of houses was known as the Main City. South of this, and less developed 
 Suburb. The North Suburb is located north of the Central City. Further north is the North 
 Palace and at the base of the cliffs lays the North City (Amarna Project).</p>
 <br/>
-<h3>Excavations and Results</h3>
-<hr/>
+<h3 class="font-bold text-gray-900 mt-10 mb-6 text-2xl">Excavations and Results</h3>
+<hr class="my-10 border-gray-100"/>
 <p>William Flinders Petrie was present in 1891 when archaeological excavations in Amarna
 began. Amarna was excavated by both German and British expeditions almost continuously 
 from 1891 until 1936. In the 1920s work was begun on Workmen’s Village, although at the 
@@ -102,9 +99,9 @@ name and the title of “Servant of the Place”. This is a title that is simila
 frequently by workmen at Deir el-Medina, a village of workers who built tombs. This is a 
 significant piece of evidence that suggests that those living in Workmen’s Village were 
 workers and artists employed in cutting and decorating rock tombs (Kemp 1984).</p>
-<figure class="figure w-100">
-<img class="img-fluid rounded mb-3" src="http://www.amarnaproject.com/pages/amarna_the_place/workmans_village/map4.shtml"/>
-<figcaption class="figure-caption"><a data-bs-toggle="popover" data-content="Image 2. The Amarna Project." href="#" rel="citation">Image 2</a> Workmen's Village excavations, 1920s</figcaption>
+<figure class="figure w-100 w-full mb-8">
+<img class="img-fluid rounded-2xl shadow-lg mb-3 mb-8 w-full h-auto rounded" src="http://www.amarnaproject.com/pages/amarna_the_place/workmans_village/map4.shtml"/>
+<figcaption class="figure-caption text-sm text-gray-500 mt-3 italic text-center"><a data-bs-toggle="popover" data-content="Image 2. The Amarna Project." href="#" rel="citation">Image 2</a> Workmen's Village excavations, 1920s</figcaption>
 </figure>
 <p>The Egypt Exploration Society resumed excavations of the site in 1977. The survey
 of the site in 1977 was carried out by Barry J. Kemp and the Inspector of Antiquities, 
@@ -143,13 +140,13 @@ Village worked on the royal tombs, thereby giving them a higher social standing 
 in Stone Village. For now, bringing the relationship of the two villages to light is not 
 possible. As more work is done on Stone Village in the future, perhaps it can also shed 
 light on the role of Workmen’s Village.</p>
-<figure class="figure w-100">
-<img class="img-fluid rounded mb-3" src="http://www.amarnaproject.com/images/recent_projects/stone_village/3.jpg"/>
-<figcaption class="figure-caption"><a data-bs-toggle="popover" data-content="Image 4. The Amarna Project" href="#" rel="citation">Image 4</a></figcaption>
+<figure class="figure w-100 w-full mb-8">
+<img class="img-fluid rounded-2xl shadow-lg mb-3 mb-8 w-full h-auto rounded" src="http://www.amarnaproject.com/images/recent_projects/stone_village/3.jpg"/>
+<figcaption class="figure-caption text-sm text-gray-500 mt-3 italic text-center"><a data-bs-toggle="popover" data-content="Image 4. The Amarna Project" href="#" rel="citation">Image 4</a></figcaption>
 </figure>
 <br/>
-<h3>Conclusion</h3>
-<hr/>
+<h3 class="font-bold text-gray-900 mt-10 mb-6 text-2xl">Conclusion</h3>
+<hr class="my-10 border-gray-100"/>
 <p>Built as the capital of a new kingship and religious order, the site of Tell el-Amarna 
 offers insight into this period of change in Egypt. The fact that it was also only occupied 
 for the short span of a generation and has largely avoided resettlement have allowed 
@@ -157,9 +154,9 @@ archaeologists to shed light on a particular period of time in Egyptian history.
 of isolated villages, such as Stone Village and Workmen’s Village, have also begun to uncover
 the reasons for the existence of these villages, as well as their relationship to each other.</p>
 <br/>
-<h3>Resources</h3>
-<hr/>
-<h4>Written:</h4>
+<h3 class="font-bold text-gray-900 mt-10 mb-6 text-2xl">Resources</h3>
+<hr class="my-10 border-gray-100"/>
+<h4 class="font-bold text-gray-900 mt-10 mb-6">Written:</h4>
 <p>Kemp, B. J. (1978). Preliminary report on the El-'Amarna survey, 1977. The Journal of 
 Egyptian Archaeology, 22-34.</p>
 <p>Kemp, B. J. (1984). Amarna reports (Vol. 1). London: Egypt exploration society.</p>
@@ -170,38 +167,44 @@ field archaeology, 22(2), 223-238.</p>
 New Kingdom Egypt. Journal of Field Archaeology 36, 100–18.</p>
 <p>amarnaproject.com</p>
 <br/>
-<h4>Images:</h4>
+<h4 class="font-bold text-gray-900 mt-10 mb-6">Images:</h4>
 <p><a href="http://www.amarnaproject.com/images/amarna_the_place/workmans_village/3.jpg" target="_blank">
 Image 1. The Amarna Project</a>.</p>
 <p><a href="http://www.amarnaproject.com/pages/amarna_the_place/workmans_village/map4.shtml" target="_blank">
 Image 2. The Amarna Project</a>.</p>
 <p><a href="http://www.amarnaproject.com/images/recent_projects/stone_village/3.jpg" target="_blank">
 Image 3. The Amarna Project</a>.</p>
-
-                    </div>
+</div>
                 </div>
             </div>
             
             <!-- Right Column: Quick Facts / Sidebar -->
-            <div class="col-lg-4">
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="card-title mb-0">Quick Facts</h5>
+            <div class="lg:col-span-4 space-y-8">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+                    <div class="bg-gradient-to-r from-gray-50 to-white px-8 py-6 border-b border-gray-100">
+                        <h5 class="font-bold text-gray-800 uppercase tracking-wider text-sm flex items-center">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                            Quick Facts
+                        </h5>
                     </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li><strong>Period:</strong> 18th Dynasty</li>
+                    <div class="p-8">
+                        <ul class="space-y-6">
+                            <li class="flex flex-col group">
+                                <span class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1 group-hover:text-blue-500 transition-colors">Period</span>
+                                <span class="font-medium text-gray-900 text-lg">18th Dynasty</span>
+                            </li>
                             <!-- Placeholder for more facts if we could extract them -->
                         </ul>
                     </div>
                 </div>
                 
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Explore More</h5>
-                        <p class="card-text">View this site on the interactive map.</p>
-                        <a href="../index.html" class="btn btn-outline-primary w-100">Back to Atlas</a>
-                    </div>
+                <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-xl p-8 text-white relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-xl group-hover:bg-white/20 transition-all duration-500"></div>
+                    <h5 class="font-bold text-2xl mb-3 relative z-10">Explore More</h5>
+                    <p class="text-blue-100 mb-8 relative z-10">View this site on the interactive map to see its location and surrounding context.</p>
+                    <a href="../index.html" class="block w-full py-4 px-6 bg-white text-blue-700 font-bold text-center rounded-xl hover:bg-blue-50 transition transform hover:-translate-y-1 shadow-lg relative z-10">
+                        Back to Atlas
+                    </a>
                 </div>
             </div>
         </div>
@@ -211,7 +214,6 @@ Image 3. The Amarna Project</a>.</p>
     <div id="central-foot"></div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="../centralize-nav-foot/nav-foot.js"></script>
     <script src="../js/main.js"></script>
 </body>

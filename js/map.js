@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const closePanelBtn = document.getElementById('close-panel');
 
     const closePanel = () => {
-        sidePanel.classList.remove('open');
+        sidePanel.classList.add('translate-x-full');
+        sidePanel.classList.remove('translate-x-0');
     };
 
     if (closePanelBtn) {
@@ -49,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Info
         panelInfo.innerHTML = `
-            <div class="mb-3 text-muted">${props.timePeriod}</div>
-            <div>${props.info}</div>
+            <div class="mb-4 text-sm font-semibold text-blue-600 uppercase tracking-wide">${props.timePeriod}</div>
+            <div class="text-gray-700 leading-relaxed">${props.info}</div>
         `;
 
         // Link (props.link is <a href="...">MORE DETAILS</a>)
@@ -58,13 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const link = tempDiv.querySelector('a');
         if (link) {
             panelLink.href = link.getAttribute('href');
-            panelLink.style.display = 'block';
+            panelLink.classList.remove('hidden');
         } else {
-            panelLink.style.display = 'none';
+            panelLink.classList.add('hidden');
         }
 
-        sidePanel.classList.add('open');
-        console.log("Side panel class added. Classes:", sidePanel.className);
+        sidePanel.classList.remove('translate-x-full');
+        sidePanel.classList.add('translate-x-0');
+        console.log("Side panel opened.");
     };
 
     // Load CSV data

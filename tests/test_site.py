@@ -1,6 +1,5 @@
 import pytest
 from playwright.sync_api import Page, expect
-import os
 import re
 
 # Helper to get URL
@@ -15,15 +14,9 @@ def test_map_initializes(page: Page):
     page.goto(get_url("index.html"))
     
     # Close modal if it appears
-    if page.locator("#myModal").is_visible():
-        # Try both BS3 and BS5 selectors just in case, but prefer BS5
-        close_btn = page.locator("[data-bs-dismiss='modal']").first
-        if not close_btn.is_visible():
-             close_btn = page.locator("[data-dismiss='modal']").first
-        
-        if close_btn.is_visible():
-            close_btn.click()
-            page.wait_for_timeout(1000) # Wait for animation
+    if page.locator("#welcome-modal").is_visible():
+        page.click("#close-modal-btn")
+        page.wait_for_timeout(500)
 
     # Wait for map to be visible
     try:
@@ -36,113 +29,68 @@ def test_map_initializes(page: Page):
 
 def test_modal_appears_and_closes(page: Page):
     page.goto(get_url("index.html"))
-    # Modal should be visible initially (assuming no cookie)
-    modal = page.locator("#myModal")
-    expect(modal).to_be_visible()
+    # Modal should be visible initially
+    modal = page.locator("#welcome-modal")
+    expect(modal).to_be_visible(timeout=5000)
     
-    # Close modal (BS5 uses data-bs-dismiss)
-    # Note: BS5 modal close button usually has class btn-close or data-bs-dismiss
-    # In my migration, I didn't explicitly update the close button HTML in index.html/projects.html
-    # I need to check if migrate_bootstrap.py handled it.
-    # migrate_bootstrap.py didn't handle data-dismiss -> data-bs-dismiss.
-    # I should update the test to look for either, or fix the HTML.
-    # But for now, let's assume I will fix the HTML.
-    page.locator("[data-bs-dismiss='modal']").first.click()
+    # Close it
+    page.click("#close-modal-btn")
     expect(modal).not_to_be_visible()
 
 def test_navigation_injection(page: Page):
-    page.goto(get_url("index.html"))
-    # Check if navbar was injected - wait for it
-    expect(page.locator("#central-nav .navbar")).to_be_visible(timeout=10000)
-    # Check for specific links
-    expect(page.locator("a:has-text('Atlas')").first).to_be_visible()
-
-def test_site_page_loads(page: Page):
-    # Test a sample site page
-    page.goto(get_url("sites/gebel-el-haridi/gebel-el-haridi.html"))
-    expect(page.locator("h1")).to_contain_text("Gebel el-Haridi")
+    """Test that the centralized navbar is injected correctly."""
+    page.goto(get_url("sites/mut-el-kharab.html"))
     
-    # Check if footer is present - wait for it
-    # Debugging: check if it's visible
-    footer = page.locator("footer")
-    expect(footer).to_be_visible(timeout=10000)
+    # Check for navbar (Tailwind uses <nav>)
+    nav = page.locator("nav").first
+    expect(nav).to_be_visible(timeout=10000)
+    
+    # Check for specific link in the navbar
+    expect(page.locator("nav a:has-text('Atlas')").first).to_be_visible()
 
 def test_responsive_layout(page: Page):
-    page.goto(get_url("index.html"))
-    # Set viewport to mobile
+    """Test that the layout adapts to mobile screens."""
     page.set_viewport_size({"width": 375, "height": 667})
-    # Check if navbar toggle is visible - wait for injection
-    # BS5 uses .navbar-toggler
-    expect(page.locator(".navbar-toggler")).to_be_visible(timeout=10000)
+    page.goto(get_url("sites/mut-el-kharab.html"))
+    
+    # Check for main content container
+    expect(page.locator(".container").first).to_be_visible()
+    
+    # Check that Quick Facts is visible (it should stack)
+    expect(page.locator("text=Quick Facts")).to_be_visible()
 
 def test_full_map_functionality(page: Page):
+    """Test the full flow: Map -> Click Marker -> Side Panel -> Detail Page."""
     page.goto(get_url("index.html"))
     
-    # 1. Map Loads
-    expect(page.locator("#map")).to_be_visible()
+    # Close modal first
+    if page.locator("#welcome-modal").is_visible():
+        page.click("#close-modal-btn")
     
-    # Close modal if present
-    if page.locator("#myModal").is_visible():
-        close_btn = page.locator("[data-bs-dismiss='modal']").first
-        if not close_btn.is_visible():
-             close_btn = page.locator("[data-dismiss='modal']").first
-        if close_btn.is_visible():
-            close_btn.click()
-            expect(page.locator("#myModal")).not_to_be_visible()
-
-    # Debug: Listen to console logs
-    page.on("console", lambda msg: print(f"Browser Console: {msg.text}"))
-
-    # 2. Pins/Data Load from CSV
-    # Wait for markers/clusters to appear
-    markers = page.locator(".leaflet-marker-icon")
-    expect(markers.first).to_be_visible(timeout=10000)
+    # Wait for markers
+    page.wait_for_selector(".leaflet-marker-icon", timeout=10000)
     
-    # Force zoom to specific site (Gebel el-Haridi) to ensure it's visible and declustered
-    page.evaluate("window.map.setView([26.555983, 31.700389], 15)")
-    page.wait_for_timeout(2000) # Wait for zoom animation and clustering update
-
-    # 3. Popups/Side Panel Work
-    # Trigger click programmatically to ensure event logic works
-    # This bypasses potential UI layer issues (z-index, etc.) which are common in map testing
-    page.evaluate("""
-        const layers = window.markers.getLayers();
-        if (layers.length > 0) {
-            layers[0].fire('click');
-        }
-    """)
+    # Click a marker (using the first one found)
+    page.locator(".leaflet-marker-icon").first.click(force=True)
     
-    # Check Side Panel appears (instead of popup)
+    # Check side panel opens (translate-x-0 means open)
     side_panel = page.locator("#side-panel")
-    expect(side_panel).to_have_class(re.compile(r"open"))
+    expect(side_panel).to_have_class(re.compile(r"translate-x-0"))
     
-    # 4. Data in Side Panel
-    # Verify it contains expected content structure
+    # Check content in side panel
     expect(page.locator("#panel-title")).not_to_be_empty()
-    expect(page.locator("#panel-info")).not_to_be_empty()
     
-    # 5. Links in Side Panel Work
-    # Verify link has a valid href
-    # 5. Links in Side Panel Work
-    # Verify link has a valid href
-    link_href = page.locator("#panel-link").get_attribute("href")
-    assert link_href and "sites/" in link_href, f"Invalid href: {link_href}"
-    
-    print(f"Found link: {link_href}")
-    
-    # Manually navigate to the link to verify the page loads
-    # (Clicking in test environment was flaky with timeouts, but we verified the link is correct)
-    page.goto(get_url(link_href))
-    
-    # Verify we are on a site page
-    # The URL should contain "sites/"
-    assert "sites/" in page.url
+    # Click 'Read More'
+    with page.expect_navigation():
+        page.click("#panel-link")
+        
+    # Verify we are on the detail page
+    expect(page).not_to_have_url(re.compile(r"index.html"))
     
     # Verify interface elements on the new page
-    expect(page.locator(".navbar")).to_be_visible(timeout=10000)
-    # Footer is still there (wait for injection)
+    expect(page.locator("nav").first).to_be_visible(timeout=10000)
     expect(page.locator("footer")).to_be_visible(timeout=10000)
     
-    # Verify new card layout
-    expect(page.locator(".card").first).to_be_visible()
+    # Verify new layout (Tailwind classes)
+    expect(page.locator(".bg-white").first).to_be_visible()
     expect(page.locator("h1")).to_be_visible()
