@@ -64,7 +64,7 @@ def test_site_page_loads(page: Page):
     
     # Check if footer is present - wait for it
     # Debugging: check if it's visible
-    footer = page.locator(".footer")
+    footer = page.locator("footer")
     expect(footer).to_be_visible(timeout=10000)
 
 def test_responsive_layout(page: Page):
@@ -141,7 +141,7 @@ def test_full_map_functionality(page: Page):
     # Verify interface elements on the new page
     expect(page.locator(".navbar")).to_be_visible(timeout=10000)
     # Footer is still there (wait for injection)
-    expect(page.locator(".footer")).to_be_visible(timeout=10000)
+    expect(page.locator("footer")).to_be_visible(timeout=10000)
     
     # Verify new card layout
     expect(page.locator(".card").first).to_be_visible()
