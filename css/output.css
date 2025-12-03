@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&family=Roboto+Condensed:wght@900&display=swap');
 
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
@@ -1208,6 +1208,14 @@ html,
   text-align: center;
 }
 
+.font-display{
+  font-family: Outfit, sans-serif;
+}
+
+.font-roboto-condensed{
+  font-family: "Roboto Condensed", sans-serif;
+}
+
 .font-sans{
   font-family: Inter, sans-serif;
 }
@@ -1240,6 +1248,10 @@ html,
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.font-black{
+  font-weight: 900;
 }
 
 .font-bold{

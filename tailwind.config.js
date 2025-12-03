@@ -6,6 +6,7 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
                 display: ['Outfit', 'sans-serif'],
+                'roboto-condensed': ['"Roboto Condensed"', 'sans-serif'],
             },
         },
     },

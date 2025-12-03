@@ -82,9 +82,25 @@ def test_resource_availability(page: Page):
     response = page.request.get(get_url("centralize-nav-foot/navbar.html"))
     expect(response).to_be_ok()
 
+    # Check footer logos
+    response = page.request.get(get_url("centralize-nav-foot/img/anp_logo.png"))
+    expect(response).to_be_ok()
+    response = page.request.get(get_url("centralize-nav-foot/img/leadr_logo.png"))
+    expect(response).to_be_ok()
+
     # Check sites/kerma.html directly
     response = page.request.get(get_url("sites/kerma.html"))
     expect(response).to_be_ok()
+
+def test_typography_applied(page: Page):
+    """Test that new font classes are applied."""
+    page.goto(get_url("sites/kerma.html"))
+    
+    # Check for font-roboto-condensed on main title
+    expect(page.locator("h1").first).to_have_class(re.compile(r"font-roboto-condensed"))
+    
+    # Check for font-sans on body/content
+    expect(page.locator("body")).to_have_class(re.compile(r"font-sans"))
 
 def test_full_map_functionality(page: Page):
     """Test the full flow: Map -> Click Marker -> Side Panel -> Detail Page."""
