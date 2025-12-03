@@ -82,6 +82,10 @@ def test_resource_availability(page: Page):
     response = page.request.get(get_url("centralize-nav-foot/navbar.html"))
     expect(response).to_be_ok()
 
+    # Check sites/kerma.html directly
+    response = page.request.get(get_url("sites/kerma.html"))
+    expect(response).to_be_ok()
+
 def test_full_map_functionality(page: Page):
     """Test the full flow: Map -> Click Marker -> Side Panel -> Detail Page."""
     
