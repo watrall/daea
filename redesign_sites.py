@@ -11,7 +11,7 @@ TEMPLATE = """<!DOCTYPE html>
     <title>{title} - DAEA</title>
     
     <!-- Tailwind CSS -->
-    <link href="{depth}css/output.css" rel="stylesheet">
+    <link href="{depth}css/output.css?v=1" rel="stylesheet">
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
 

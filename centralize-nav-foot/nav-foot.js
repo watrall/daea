@@ -20,8 +20,9 @@ const init = () => {
     // Use absolute paths for fetching to avoid relative path ambiguity
     // We assume navbar.html and footer.html are in the same directory as this script
     const scriptUrl = new URL(absoluteScriptSrc);
-    const navUrl = new URL("navbar.html", scriptUrl).href;
-    const footUrl = new URL("footer.html", scriptUrl).href;
+    const timestamp = new Date().getTime();
+    const navUrl = new URL(`navbar.html?v=${timestamp}`, scriptUrl).href;
+    const footUrl = new URL(`footer.html?v=${timestamp}`, scriptUrl).href;
 
     // Helper to load HTML
     const loadHtml = async (elementId, url) => {
