@@ -16,5 +16,26 @@ leaflet-omnivore-master/
 normalize_filenames.py
 migrate_bootstrap.py
 refactor_sites.py
+fix_filenames.sh
 map_failure.png
 verify_links.py
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+Thumbs.db
+
+# Backups / Old Files
+centralize-nav-foot/sites-old-*
+
+# Build Artifacts
+dist/
+build/
