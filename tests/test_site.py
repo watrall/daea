@@ -72,6 +72,16 @@ def test_responsive_layout(page: Page):
     # Check that Quick Facts is visible (it should stack)
     expect(page.locator("text=Quick Facts")).to_be_visible()
 
+def test_resource_availability(page: Page):
+    """Verify that critical resources are served correctly."""
+    # Check nav-foot.js
+    response = page.request.get(get_url("centralize-nav-foot/nav-foot.js"))
+    expect(response).to_be_ok()
+    
+    # Check navbar.html
+    response = page.request.get(get_url("centralize-nav-foot/navbar.html"))
+    expect(response).to_be_ok()
+
 def test_full_map_functionality(page: Page):
     """Test the full flow: Map -> Click Marker -> Side Panel -> Detail Page."""
     
@@ -119,4 +129,7 @@ def test_full_map_functionality(page: Page):
         for log in console_logs:
             print(log)
         print("============================")
+        print("\n=== Page Content ===")
+        print(page.content())
+        print("====================")
         raise e
