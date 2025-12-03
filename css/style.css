@@ -104,6 +104,56 @@ body {
     font-style: italic;
 }
 
+/* Side Panel
+-------------------------------------------------- */
+.side-panel {
+    position: fixed;
+    top: var(--navbar-height);
+    right: -400px;
+    /* Hidden by default */
+    width: 400px;
+    height: calc(100% - var(--navbar-height) - var(--footer-height));
+    background: var(--white);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    /* Above map */
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-panel.open {
+    right: 0;
+}
+
+.side-panel-header {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--light-gray);
+}
+
+.side-panel-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.side-panel-body {
+    padding: 1rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+/* Responsive Side Panel */
+@media (max-width: 576px) {
+    .side-panel {
+        width: 100%;
+        right: -100%;
+    }
+}
+
 /* Utilities
 -------------------------------------------------- */
 /* BS5 provides d-flex, justify-content-center, etc. No need to redefine. */
