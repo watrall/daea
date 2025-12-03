@@ -61,36 +61,49 @@ def test_responsive_layout(page: Page):
 
 def test_full_map_functionality(page: Page):
     """Test the full flow: Map -> Click Marker -> Side Panel -> Detail Page."""
-    page.goto(get_url("index.html"))
     
-    # Close modal first
-    if page.locator("#welcome-modal").is_visible():
-        page.click("#close-modal-btn")
-    
-    # Wait for markers
-    page.wait_for_selector(".leaflet-marker-icon", timeout=10000)
-    
-    # Click a marker (using the first one found)
-    page.locator(".leaflet-marker-icon").first.click(force=True)
-    
-    # Check side panel opens (translate-x-0 means open)
-    side_panel = page.locator("#side-panel")
-    expect(side_panel).to_have_class(re.compile(r"translate-x-0"))
-    
-    # Check content in side panel
-    expect(page.locator("#panel-title")).not_to_be_empty()
-    
-    # Click 'Read More'
-    with page.expect_navigation():
-        page.click("#panel-link")
+    # Capture console logs
+    console_logs = []
+    page.on("console", lambda msg: console_logs.append(msg.text))
+
+    try:
+        page.goto(get_url("index.html"))
         
-    # Verify we are on the detail page
-    expect(page).not_to_have_url(re.compile(r"index.html"))
-    
-    # Verify interface elements on the new page
-    expect(page.locator("nav").first).to_be_visible(timeout=10000)
-    expect(page.locator("footer")).to_be_visible(timeout=10000)
-    
-    # Verify new layout (Tailwind classes)
-    expect(page.locator(".bg-white").first).to_be_visible()
-    expect(page.locator("h1")).to_be_visible()
+        # Close modal first
+        if page.locator("#welcome-modal").is_visible():
+            page.click("#close-modal-btn")
+        
+        # Wait for markers
+        page.wait_for_selector(".leaflet-marker-icon", timeout=10000)
+        
+        # Click a marker (using the first one found)
+        page.locator(".leaflet-marker-icon").first.click(force=True)
+        
+        # Check side panel opens (translate-x-0 means open)
+        side_panel = page.locator("#side-panel")
+        expect(side_panel).to_have_class(re.compile(r"translate-x-0"))
+        
+        # Check content in side panel
+        expect(page.locator("#panel-title")).not_to_be_empty()
+        
+        # Click 'Read More'
+        with page.expect_navigation():
+            page.click("#panel-link")
+            
+        # Verify we are on the detail page
+        expect(page).not_to_have_url(re.compile(r"index.html"))
+        
+        # Verify interface elements on the new page
+        expect(page.locator("nav").first).to_be_visible(timeout=10000)
+        expect(page.locator("footer")).to_be_visible(timeout=10000)
+        
+        # Verify new layout (Tailwind classes)
+        expect(page.locator(".bg-white").first).to_be_visible()
+        expect(page.locator("h1")).to_be_visible()
+        
+    except Exception as e:
+        print("\n=== Browser Console Logs ===")
+        for log in console_logs:
+            print(log)
+        print("============================")
+        raise e

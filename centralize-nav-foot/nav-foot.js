@@ -1,37 +1,34 @@
 const init = () => {
-    // Calculate depth relative to root
-    // We assume the site root is where index.html is.
-    // If we are in /sites/subdir/file.html, we need ../../
-    // If we are in /sites/file.html, we need ../
-    // If we are in /index.html, we need ./ (or empty)
-
-    // Simple heuristic: count slashes after the domain/port
-    // But this depends on where the site is hosted (e.g. localhost:8000/ vs localhost:8000/daea/)
-    // Better: use the script tag src to find the relative path to the script itself?
-    // The script is at [prefix]centralize-nav-foot/nav-foot.js
-
     const scripts = document.getElementsByTagName('script');
     let scriptSrc = "";
+    let absoluteScriptSrc = "";
+
     for (let i = 0; i < scripts.length; i++) {
         if (scripts[i].src && scripts[i].src.includes("nav-foot.js")) {
             scriptSrc = scripts[i].getAttribute("src");
+            absoluteScriptSrc = scripts[i].src;
             break;
         }
     }
 
-    const prefix = scriptSrc.replace("centralize-nav-foot/nav-foot.js", "");
-    console.log("nav-foot.js loaded. Script src:", scriptSrc);
+    const prefix = scriptSrc ? scriptSrc.replace("centralize-nav-foot/nav-foot.js", "") : "";
+    console.log("nav-foot.js loaded.");
+    console.log("Relative Script src:", scriptSrc);
+    console.log("Absolute Script src:", absoluteScriptSrc);
     console.log("Calculated prefix:", prefix);
 
-    const navPath = prefix + "centralize-nav-foot/navbar.html";
-    const footPath = prefix + "centralize-nav-foot/footer.html";
+    // Use absolute paths for fetching to avoid relative path ambiguity
+    // We assume navbar.html and footer.html are in the same directory as this script
+    const scriptUrl = new URL(absoluteScriptSrc);
+    const navUrl = new URL("navbar.html", scriptUrl).href;
+    const footUrl = new URL("footer.html", scriptUrl).href;
 
     // Helper to load HTML
-    const loadHtml = async (elementId, path) => {
+    const loadHtml = async (elementId, url) => {
         try {
-            console.log(`Fetching ${path} for #${elementId}...`);
-            const response = await fetch(path);
-            if (!response.ok) throw new Error(`Failed to load ${path}: ${response.status} ${response.statusText}`);
+            console.log(`Fetching ${url} for #${elementId}...`);
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed to load ${url}: ${response.status} ${response.statusText}`);
             const html = await response.text();
             const element = document.getElementById(elementId);
             if (element) {
@@ -64,8 +61,8 @@ const init = () => {
         }
     };
 
-    loadHtml("central-nav", navPath);
-    loadHtml("central-foot", footPath);
+    loadHtml("central-nav", navUrl);
+    loadHtml("central-foot", footUrl);
 };
 
 if (document.readyState === 'loading') {
