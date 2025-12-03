@@ -151,7 +151,7 @@ def process_file(filepath):
 def main():
     for root, dirs, files in os.walk(ROOT_DIR):
         for file in files:
-            if file.endswith(".html") and "AA-template" not in root:
+            if file.endswith(".html") and "aa-template" not in root:
                 process_file(os.path.join(root, file))
 
 if __name__ == "__main__":

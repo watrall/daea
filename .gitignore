@@ -1,0 +1,12 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Utility Scripts
+normalize_filenames.py
+redesign_sites.py
+refactor_sites.py
+migrate_bootstrap.py
+map_failure.png
