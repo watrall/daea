@@ -22,10 +22,10 @@ TEMPLATE = """<!DOCTYPE html>
     <header class="bg-blue-900 text-white py-24 mb-12 shadow-xl relative overflow-hidden">
         <div class="absolute inset-0 bg-black/30 z-0"></div>
         <div class="container mx-auto px-4 relative z-10 text-center">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-md">{title}</h1>
-            <p class="text-2xl text-blue-100 mb-6 font-light tracking-wide">{subtitle}</p>
+            <h1 class="text-5xl md:text-6xl font-display font-extrabold mb-4 tracking-tight drop-shadow-md">{title}</h1>
+            <p class="text-2xl text-blue-100 mb-6 font-light tracking-wide">{period}</p>
             <div class="inline-block bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <p class="text-sm uppercase tracking-widest text-blue-50 font-semibold">{author}</p>
+                <p class="text-sm uppercase tracking-widest text-blue-50 font-semibold">{researcher}</p>
             </div>
         </div>
     </header>
@@ -35,8 +35,10 @@ TEMPLATE = """<!DOCTYPE html>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- Left Column: Content -->
             <div class="lg:col-span-8">
-                <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                    {content}
+                <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 prose prose-lg max-w-none text-gray-700 leading-relaxed font-sans">
+                    <div class="card-body content-body">
+{content}
+                    </div>
                 </div>
             </div>
             
@@ -44,7 +46,7 @@ TEMPLATE = """<!DOCTYPE html>
             <div class="lg:col-span-4 space-y-8">
                 <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
                     <div class="bg-gradient-to-r from-gray-50 to-white px-8 py-6 border-b border-gray-100">
-                        <h5 class="font-bold text-gray-800 uppercase tracking-wider text-sm flex items-center">
+                        <h5 class="font-display font-bold text-gray-800 uppercase tracking-wider text-sm flex items-center">
                             <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
                             Quick Facts
                         </h5>
@@ -53,7 +55,7 @@ TEMPLATE = """<!DOCTYPE html>
                         <ul class="space-y-6">
                             <li class="flex flex-col group">
                                 <span class="text-gray-400 text-xs uppercase font-bold tracking-wider mb-1 group-hover:text-blue-500 transition-colors">Period</span>
-                                <span class="font-medium text-gray-900 text-lg">{subtitle}</span>
+                                <span class="font-medium text-gray-900 text-lg">{period}</span>
                             </li>
                             <!-- Placeholder for more facts if we could extract them -->
                         </ul>
@@ -62,7 +64,7 @@ TEMPLATE = """<!DOCTYPE html>
                 
                 <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-xl p-8 text-white relative overflow-hidden group">
                     <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-xl group-hover:bg-white/20 transition-all duration-500"></div>
-                    <h5 class="font-bold text-2xl mb-3 relative z-10">Explore More</h5>
+                    <h5 class="font-display font-bold text-2xl mb-3 relative z-10">Explore More</h5>
                     <p class="text-blue-100 mb-8 relative z-10">View this site on the interactive map to see its location and surrounding context.</p>
                     <a href="{depth}index.html" class="block w-full py-4 px-6 bg-white text-blue-700 font-bold text-center rounded-xl hover:bg-blue-50 transition transform hover:-translate-y-1 shadow-lg relative z-10">
                         Back to Atlas
@@ -126,14 +128,14 @@ def process_file(filepath):
     title = h1.get_text(strip=True) if h1 else "Unknown Site"
     if h1: h1.decompose()
 
-    # Extract Subtitle (first h3 usually)
+    # Extract Period (first h3 usually)
     h3 = detail.find('h3')
-    subtitle = h3.get_text(strip=True) if h3 else ""
+    period = h3.get_text(strip=True) if h3 else ""
     if h3: h3.decompose()
 
-    # Extract Author (h4)
+    # Extract Researcher (h4)
     h4 = detail.find('h4')
-    author = h4.get_text(strip=True) if h4 else ""
+    researcher = h4.get_text(strip=True) if h4 else ""
     if h4: h4.decompose()
 
     # Fix images: Tailwind responsive images
@@ -173,8 +175,8 @@ def process_file(filepath):
 
     new_html = TEMPLATE.format(
         title=title,
-        subtitle=subtitle,
-        author=author,
+        period=period,
+        researcher=researcher,
         content=content,
         depth=depth
     )

@@ -47,6 +47,19 @@ def test_navigation_injection(page: Page):
     
     # Check for specific link in the navbar
     expect(page.locator("nav a:has-text('Atlas')").first).to_be_visible()
+    
+    # Check that Projects link is GONE
+    expect(page.locator("nav a:has-text('Projects')")).not_to_be_visible()
+
+def test_typography_applied(page: Page):
+    """Test that new font classes are applied."""
+    page.goto(get_url("sites/mut-el-kharab.html"))
+    
+    # Check for font-display on headings
+    expect(page.locator("h1").first).to_have_class(re.compile(r"font-display"))
+    
+    # Check for font-sans on body/content
+    expect(page.locator("body")).to_have_class(re.compile(r"font-sans"))
 
 def test_responsive_layout(page: Page):
     """Test that the layout adapts to mobile screens."""

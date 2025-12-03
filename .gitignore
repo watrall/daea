@@ -15,7 +15,6 @@ leaflet-omnivore-master/
 # Utility Scripts
 normalize_filenames.py
 migrate_bootstrap.py
-redesign_sites.py
 refactor_sites.py
 map_failure.png
 verify_links.py
