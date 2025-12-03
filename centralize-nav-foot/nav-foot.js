@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+const init = () => {
     // Calculate depth relative to root
     // We assume the site root is where index.html is.
     // If we are in /sites/subdir/file.html, we need ../../
@@ -20,18 +20,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const prefix = scriptSrc.replace("centralize-nav-foot/nav-foot.js", "");
+    console.log("nav-foot.js loaded. Script src:", scriptSrc);
+    console.log("Calculated prefix:", prefix);
+
     const navPath = prefix + "centralize-nav-foot/navbar.html";
     const footPath = prefix + "centralize-nav-foot/footer.html";
 
     // Helper to load HTML
     const loadHtml = async (elementId, path) => {
         try {
+            console.log(`Fetching ${path} for #${elementId}...`);
             const response = await fetch(path);
-            if (!response.ok) throw new Error(`Failed to load ${path}`);
+            if (!response.ok) throw new Error(`Failed to load ${path}: ${response.status} ${response.statusText}`);
             const html = await response.text();
             const element = document.getElementById(elementId);
             if (element) {
                 element.innerHTML = html;
+                console.log(`Injected content into #${elementId}`);
 
                 // Fix links/images if needed
                 if (prefix) {
@@ -51,12 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                 }
+            } else {
+                console.error(`Element #${elementId} not found!`);
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error in loadHtml:", error);
         }
     };
 
     loadHtml("central-nav", navPath);
     loadHtml("central-foot", footPath);
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
